@@ -11,6 +11,7 @@ public class MainJsGen {
 
 	private static Set<String> printedNodes = new HashSet<String>();
 	private static Set<String> printedEdges = new HashSet<String>();
+    public static final int LIMIT = 50;
 
     public static void main(String[] args) {
 	    Gson g = new GsonBuilder().create();
@@ -23,7 +24,7 @@ public class MainJsGen {
 	private static void print(Node root, boolean edges) {
 		if (!"Topic".equals(root.getKind())) return;
 		if (!edges) {
-			if (!printedNodes.contains(root.getId())) {
+			if (!printedNodes.contains(root.getId()) && printedEdges.size()<LIMIT) {
 				System.out.println("var " + root.getId() + " = graph.newNode({label: '" + escape(root.getTitle()) + "'});");
 				printedNodes.add(root.getId());
 			}
