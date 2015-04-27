@@ -1,226 +1,71 @@
-<html>
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+</style>
 <body>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-<script src="springy.js"></script>
-<script src="springyui.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
-var graph = new Springy.Graph();
 
-var dennis = graph.newNode({
-  label: 'Dennis',
-  ondoubleclick: function() { console.log("Hello!"); }
-});
-var x00000000 = graph.newNode({label: 'Khan Academy'});
-var x29232c6b = graph.newNode({label: 'New and noteworthy'});
-var x7a488390 = graph.newNode({label: 'Math'});
-var xb5feb28c = graph.newNode({label: 'Early math'});
-var x310ffe65 = graph.newNode({label: 'Counting'});
-var x3f2a1471 = graph.newNode({label: 'Counting'});
-var x294ee063 = graph.newNode({label: 'Counting objects'});
-var xd4e975fb = graph.newNode({label: 'Comparing numbers through 10'});
-var x314bd06e = graph.newNode({label: 'Place value and patterns'});
-var x461fdd16 = graph.newNode({label: 'Tens'});
-var x949ad38e = graph.newNode({label: 'Hundreds'});
-var x38fa8305 = graph.newNode({label: 'Skip-counting'});
-var x799f31c1 = graph.newNode({label: 'Patterns'});
-var xa2993d94 = graph.newNode({label: 'Addition and subtraction'});
-var x224ced2e = graph.newNode({label: 'Basic addition and subtraction'});
-var x454784aa = graph.newNode({label: 'Addition and subtraction within 10'});
-var x69f4ae87 = graph.newNode({label: 'Addition and subtraction within 20'});
-var xb7720156 = graph.newNode({label: 'Word problems within 20'});
-var x681200f7 = graph.newNode({label: 'Addition within 100'});
-var xc42ab451 = graph.newNode({label: 'Subtraction within 100'});
-var xd04f2a96 = graph.newNode({label: 'Addition and subtraction word problems within 100'});
-var xd52de3a3 = graph.newNode({label: 'Addition and subtraction within 1000'});
-var x853bca69 = graph.newNode({label: 'Measurement and data'});
-var x61ce45b8 = graph.newNode({label: 'Measurement'});
-var x155cfe5f = graph.newNode({label: 'Data'});
-var xcdefd10e = graph.newNode({label: 'Time and money'});
-var x54b9a662 = graph.newNode({label: 'Geometry'});
-var x50af6f22 = graph.newNode({label: 'Recognizing shapes'});
-var x4321bcb4 = graph.newNode({label: 'Composing shapes'});
-var xc7f617f2 = graph.newNode({label: '3rd grade (U.S.)'});
-var x4d345626 = graph.newNode({label: 'Addition and subtraction'});
-var xc8270b28 = graph.newNode({label: 'Adding with regrouping within 1000'});
-var x0864da5f = graph.newNode({label: 'Using regrouping to subtract within 1000'});
-var x149f953f = graph.newNode({label: 'Multiplication and division'});
-var x12a9ac16 = graph.newNode({label: 'Concept of multiplication and division'});
-var x83365e84 = graph.newNode({label: 'Applying multiplication and division'});
-var x3ba603bd = graph.newNode({label: 'Two-step word problems'});
-var x3cfa9e4e = graph.newNode({label: 'Multiplying by tens'});
-var x63009ec3 = graph.newNode({label: 'Fractions'});
-var xc863ef59 = graph.newNode({label: 'What fractions mean'});
-var x60e527aa = graph.newNode({label: 'Comparing fractions'});
-var x3b2192e4 = graph.newNode({label: 'Measurement and geometry'});
-var xb553df9d = graph.newNode({label: 'Area'});
-var xd2b716c2 = graph.newNode({label: 'Perimeter'});
-var xaad02783 = graph.newNode({label: 'Telling time'});
-var x30330bff = graph.newNode({label: 'Data'});
-var x6d06d8d5 = graph.newNode({label: 'Mass and volume'});
-var x6bf5c427 = graph.newNode({label: 'Shapes'});
-var xb514f3b9 = graph.newNode({label: 'Place value and rounding'});
-var x094c347d = graph.newNode({label: 'Rounding'});
-var x79d23611 = graph.newNode({label: 'Expressions and patterns'});
-var x96bb1013 = graph.newNode({label: 'Properties and patterns in arithmetic'});
-var x5ec3eb59 = graph.newNode({label: '4th grade (U.S.)'});
-var x447822a8 = graph.newNode({label: 'Addition and subtraction'});
-var xa7e8a5af = graph.newNode({label: 'Adding multi-digit numbers'});
-var xb397d6c7 = graph.newNode({label: 'Subtracting: multi-digit numbers'});
-var xb55cb073 = graph.newNode({label: 'Multiplication and division'});
-var x72251f37 = graph.newNode({label: 'Multiplication'});
-var xd70047de = graph.newNode({label: 'Multiplying using grids and area models to visualize'});
-var xa8b72c0d = graph.newNode({label: 'Comparing with multiplication'});
-var x9cfba071 = graph.newNode({label: 'Division'});
-var xcaadc452 = graph.newNode({label: 'Multiplication, division word problems'});
-var xfaed0f99 = graph.newNode({label: 'Fractions'});
-var xfb2d260b = graph.newNode({label: 'Equivalent fractions'});
-var xc9050d10 = graph.newNode({label: 'Comparing fractions'});
-var x3a399a2d = graph.newNode({label: 'Adding and subtracting fractions with common denominators'});
-var x1898834a = graph.newNode({label: 'Word problems: Adding and subtracting fractions'});
-var xf78308be = graph.newNode({label: 'Mixed numbers'});
-var x9e89943d = graph.newNode({label: 'Decomposing fractions'});
-var x06ed16fd = graph.newNode({label: 'Multiplying whole numbers and fractions'});
-var x15e62519 = graph.newNode({label: 'Decimals and fractions'});
-var x96034db5 = graph.newNode({label: 'Adding fractions with unlike denominators'});
-var xd1bae9e7 = graph.newNode({label: 'Rewriting fractions as decimals'});
-var x58fcadff = graph.newNode({label: 'Measurement and data'});
-var xd55cd13a = graph.newNode({label: 'Measuring with metric and U.S. customary units: intro'});
-var xf76c8a71 = graph.newNode({label: 'Unit conversion'});
-var x51d65f6a = graph.newNode({label: 'Word problems: moving between units of measurement'});
-var x33582dbd = graph.newNode({label: 'Area and perimeter'});
-var x6391dfd7 = graph.newNode({label: 'Data'});
-var xd796b5cb = graph.newNode({label: 'Geometry'});
-var xd7a0f2b2 = graph.newNode({label: 'Basic geometry: lines, line segments and rays'});
-var xcde4d074 = graph.newNode({label: 'Angles'});
-var xa1872502 = graph.newNode({label: 'Interpreting and constructing angles'});
-var x3d7dbe96 = graph.newNode({label: 'Line of symmetry'});
-var xc16a83ca = graph.newNode({label: 'Classifying geometric shapes'});
-var xa391e5e5 = graph.newNode({label: 'Factors, multiples and patterns'});
-var xc3e9ae5c = graph.newNode({label: 'Factors and multiples'});
-var x14d90c9b = graph.newNode({label: 'Prime and composite numbers'});
-var x3cb5fd67 = graph.newNode({label: 'Math patterns'});
-var x4d29b2d1 = graph.newNode({label: 'Place value and rounding'});
-var x70d36e3f = graph.newNode({label: 'Place value'});
-var x00d87fa7 = graph.newNode({label: 'Rounding whole numbers'});
-var xb830458a = graph.newNode({label: '5th grade (U.S.)'});
-var x59c3b242 = graph.newNode({label: 'Arithmetic operations'});
-var xc1c09c3c = graph.newNode({label: 'Adding decimals'});
-var x98b7fb22 = graph.newNode({label: 'Subtracting decimals'});
-var x47e5ee9a = graph.newNode({label: 'Multiplying whole numbers and decimals'});
-var xf644ee24 = graph.newNode({label: 'Dividing by two digits'});
-var xadc3c612 = graph.newNode({label: 'Dividing decimals'});
-var x91cad26e = graph.newNode({label: 'Fractions'});
-var x5f6abeb2 = graph.newNode({label: 'Adding and subtracting fractions'});
-graph.newEdge(x00000000, x29232c6b);
-graph.newEdge(x00000000, x7a488390);
-graph.newEdge(x7a488390, xb5feb28c);
-graph.newEdge(x7a488390, xc7f617f2);
-graph.newEdge(x7a488390, x5ec3eb59);
-graph.newEdge(x7a488390, xb830458a);
-graph.newEdge(xb5feb28c, x310ffe65);
-graph.newEdge(xb5feb28c, x314bd06e);
-graph.newEdge(xb5feb28c, xa2993d94);
-graph.newEdge(xb5feb28c, x853bca69);
-graph.newEdge(xb5feb28c, x54b9a662);
-graph.newEdge(x310ffe65, x3f2a1471);
-graph.newEdge(x310ffe65, x294ee063);
-graph.newEdge(x310ffe65, xd4e975fb);
-graph.newEdge(x314bd06e, x461fdd16);
-graph.newEdge(x314bd06e, x949ad38e);
-graph.newEdge(x314bd06e, x38fa8305);
-graph.newEdge(x314bd06e, x799f31c1);
-graph.newEdge(xa2993d94, x224ced2e);
-graph.newEdge(xa2993d94, x454784aa);
-graph.newEdge(xa2993d94, x69f4ae87);
-graph.newEdge(xa2993d94, xb7720156);
-graph.newEdge(xa2993d94, x681200f7);
-graph.newEdge(xa2993d94, xc42ab451);
-graph.newEdge(xa2993d94, xd04f2a96);
-graph.newEdge(xa2993d94, xd52de3a3);
-graph.newEdge(x853bca69, x61ce45b8);
-graph.newEdge(x853bca69, x155cfe5f);
-graph.newEdge(x853bca69, xcdefd10e);
-graph.newEdge(x54b9a662, x50af6f22);
-graph.newEdge(x54b9a662, x4321bcb4);
-graph.newEdge(xc7f617f2, x4d345626);
-graph.newEdge(xc7f617f2, x149f953f);
-graph.newEdge(xc7f617f2, x63009ec3);
-graph.newEdge(xc7f617f2, x3b2192e4);
-graph.newEdge(xc7f617f2, xb514f3b9);
-graph.newEdge(xc7f617f2, x79d23611);
-graph.newEdge(x4d345626, xc8270b28);
-graph.newEdge(x4d345626, x0864da5f);
-graph.newEdge(x149f953f, x12a9ac16);
-graph.newEdge(x149f953f, x83365e84);
-graph.newEdge(x149f953f, x3ba603bd);
-graph.newEdge(x149f953f, x3cfa9e4e);
-graph.newEdge(x63009ec3, xc863ef59);
-graph.newEdge(x63009ec3, x60e527aa);
-graph.newEdge(x3b2192e4, xb553df9d);
-graph.newEdge(x3b2192e4, xd2b716c2);
-graph.newEdge(x3b2192e4, xaad02783);
-graph.newEdge(x3b2192e4, x30330bff);
-graph.newEdge(x3b2192e4, x6d06d8d5);
-graph.newEdge(x3b2192e4, x6bf5c427);
-graph.newEdge(xb514f3b9, x094c347d);
-graph.newEdge(x79d23611, x96bb1013);
-graph.newEdge(x5ec3eb59, x447822a8);
-graph.newEdge(x5ec3eb59, xb55cb073);
-graph.newEdge(x5ec3eb59, xfaed0f99);
-graph.newEdge(x5ec3eb59, x58fcadff);
-graph.newEdge(x5ec3eb59, xd796b5cb);
-graph.newEdge(x5ec3eb59, xa391e5e5);
-graph.newEdge(x5ec3eb59, x4d29b2d1);
-graph.newEdge(x447822a8, xa7e8a5af);
-graph.newEdge(x447822a8, xb397d6c7);
-graph.newEdge(xb55cb073, x72251f37);
-graph.newEdge(xb55cb073, xd70047de);
-graph.newEdge(xb55cb073, xa8b72c0d);
-graph.newEdge(xb55cb073, x9cfba071);
-graph.newEdge(xb55cb073, xcaadc452);
-graph.newEdge(xfaed0f99, xfb2d260b);
-graph.newEdge(xfaed0f99, xc9050d10);
-graph.newEdge(xfaed0f99, x3a399a2d);
-graph.newEdge(xfaed0f99, x1898834a);
-graph.newEdge(xfaed0f99, xf78308be);
-graph.newEdge(xfaed0f99, x9e89943d);
-graph.newEdge(xfaed0f99, x06ed16fd);
-graph.newEdge(xfaed0f99, x15e62519);
-graph.newEdge(xfaed0f99, x96034db5);
-graph.newEdge(xfaed0f99, xd1bae9e7);
-graph.newEdge(x58fcadff, xd55cd13a);
-graph.newEdge(x58fcadff, xf76c8a71);
-graph.newEdge(x58fcadff, x51d65f6a);
-graph.newEdge(x58fcadff, x33582dbd);
-graph.newEdge(x58fcadff, x6391dfd7);
-graph.newEdge(xd796b5cb, xd7a0f2b2);
-graph.newEdge(xd796b5cb, xcde4d074);
-graph.newEdge(xd796b5cb, xa1872502);
-graph.newEdge(xd796b5cb, x3d7dbe96);
-graph.newEdge(xd796b5cb, xc16a83ca);
-graph.newEdge(xa391e5e5, xc3e9ae5c);
-graph.newEdge(xa391e5e5, x14d90c9b);
-graph.newEdge(xa391e5e5, x3cb5fd67);
-graph.newEdge(x4d29b2d1, x70d36e3f);
-graph.newEdge(x4d29b2d1, x00d87fa7);
-graph.newEdge(xb830458a, x59c3b242);
-graph.newEdge(xb830458a, x91cad26e);
-graph.newEdge(x59c3b242, xc1c09c3c);
-graph.newEdge(x59c3b242, x98b7fb22);
-graph.newEdge(x59c3b242, x47e5ee9a);
-graph.newEdge(x59c3b242, xf644ee24);
-graph.newEdge(x59c3b242, xadc3c612);
-graph.newEdge(x91cad26e, x5f6abeb2);
+var width = 3080,
+    height = 2500;
 
+var color = d3.scale.category20();
 
+var force = d3.layout.force()
+    .charge(-120)
+    .linkDistance(30)
+    .size([width, height]);
 
-jQuery(function(){
-  var springy = window.springy = jQuery('#springydemo').springy({
-    graph: graph
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+d3.json("d3_graph.json", function(error, graph) {
+  force
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .start();
+
+  var link = svg.selectAll(".link")
+      .data(graph.links)
+    .enter().append("line")
+      .attr("class", "link")
+      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+  var node = svg.selectAll(".node")
+      .data(graph.nodes)
+    .enter()
+
+/*
+    .append("circle")
+      .attr("class", "node")
+      .attr("r", 5)
+      .style("fill", function(d) { return color(d.group); })
+      .call(force.drag); */
+
+  .append("text")
+      .text(function(d) { return d.name.substring(0, 12); });
+
+  force.on("end", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("x", function(d) { return d.x; })
+        .attr("y", function(d) { return d.y; });
   });
 });
-</script>
 
-<canvas id="springydemo" width="6400" height="4800" />
-</body>
-</html>
+</script>
