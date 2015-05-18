@@ -3,24 +3,19 @@
  */
 package com.company;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
+import com.google.gson.*;
 
 public class D3JsGenerator {
 
-    private static Map<String,Integer> processedNodes = new HashMap<String, Integer>();
+    private static Map<String, Integer> processedNodes = new HashMap<String, Integer>();
     private static Set<String> processedEdges = new HashSet<String>();
+    private static Set<Integer> sources = new HashSet<Integer>();
+    private static List<Link> links = new ArrayList<Link>();
 
     private static JsonArray nodes = new JsonArray();
-    private static JsonArray links = new JsonArray();
 
     public static final int LIMIT = 10000;
 
@@ -33,7 +28,18 @@ public class D3JsGenerator {
 
         JsonObject data = new JsonObject();
         data.add("nodes", nodes);
-        data.add("links", links);
+
+        // convert links to json and remove leaf nodes in the process
+        JsonArray linksJson = new JsonArray();
+        for (Link link : links) {
+            if (sources.contains(link.target)) {
+                JsonObject node = new JsonObject();
+                node.addProperty("source", link.source);
+                node.addProperty("target", link.target);
+                linksJson.add(node);
+            }
+        }
+        data.add("links", linksJson);
 
         System.out.println(gson.toJson(data));
     }
@@ -41,13 +47,6 @@ public class D3JsGenerator {
     private static JsonObject createNode(String name) {
         JsonObject node = new JsonObject();
         node.addProperty("name", name);
-        return node;
-    }
-
-    private static JsonObject createLink(Integer source, Integer target) {
-        JsonObject node = new JsonObject();
-        node.addProperty("source", source);
-        node.addProperty("target", target);
         return node;
     }
 
@@ -67,7 +66,7 @@ public class D3JsGenerator {
 
     private static void printNodeWithoutEdges(Node root) {
         if (!"Topic".equals(root.getKind())) return;
-        if (processedNodes.size()>LIMIT) {
+        if (processedNodes.size() > LIMIT) {
             return;
         }
         if (!processedNodes.containsKey(root.getId())) {
@@ -82,13 +81,25 @@ public class D3JsGenerator {
     }
 
     private static void printEdge(Node root, Node node) {
-        String edgeKey = root.getId()+"-"+node.getId();
+        String edgeKey = root.getId() + "-" + node.getId();
         if (!processedEdges.contains(edgeKey)) {
             if (processedNodes.containsKey(root.getId()) && processedNodes.containsKey(node.getId())) {
-                links.add(createLink(processedNodes.get(root.getId()), processedNodes.get(node.getId())));
+                int source = processedNodes.get(root.getId());
+                links.add(new Link(source, processedNodes.get(node.getId())));
+                sources.add(source);
                 processedEdges.add(edgeKey);
             }
         }
         printNodeWithEdges(node);
+    }
+
+    public static class Link {
+        public int source;
+        public int target;
+
+        public Link(int source, int target) {
+            this.source = source;
+            this.target = target;
+        }
     }
 }
